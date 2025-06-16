@@ -1,6 +1,6 @@
 import { Modal, Descriptions } from "antd";
 
-const StoreModal = ({ store, products, onClose }) => (
+const StoreDetailsModal = ({ store, products, onClose }) => (
   <Modal
     width="60%"
     title={`Store: ${store.address.street}`}
@@ -53,4 +53,4 @@ const StoreModal = ({ store, products, onClose }) => (
   </Modal>
 );
 
-export default StoreModal;
+export default StoreDetailsModal;

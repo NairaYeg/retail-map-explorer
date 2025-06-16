@@ -3,7 +3,7 @@ import { useContext, useMemo, useState } from 'react';
 import { Card, Statistic, Row, Col, Empty , Typography } from 'antd';
 import L from 'leaflet';
 import ProductSearch from './ProductSearch';
-import StoreModal from './StoreModal';
+import StoreDetailsModal from './StoreDetailsModal';
 import { DataContext } from '../context/DataContext';
 import { getFilteredStores } from '../helpers/getFilteredStores';
 import 'leaflet/dist/leaflet.css';
@@ -91,7 +91,7 @@ const StoreMap = () => {
         </MapContainer>
       </div>
       {selectedStore && (
-        <StoreModal
+        <StoreDetailsModal
           store={selectedStore}
           products={products.filter((p) => p.store_id === String(selectedStore.store_id))}
           onClose={() => setSelectedStore(null)}
