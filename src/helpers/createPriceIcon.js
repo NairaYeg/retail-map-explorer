@@ -9,17 +9,21 @@ import L from "leaflet";
  * @returns {string} The calculated color in HSL format.
  */
 const getPriceGradientColor = (price, min, max) => {
-  if (min === max) return "#1890ff"; // Blue fallback
+  if (min === max) return "#1B9E77"; // Blue-green fallback for single price
 
-  const YELLOW_HUE = 60;
-  const BLUE_HUE = 240;
-  const SATURATION = 100;
-  const LIGHTNESS = 50;
+  const LOW_PRICE_COLOR = { h: 174, s: 67, l: 46 }; // Blue-green (#1B9E77)
+  const HIGH_PRICE_COLOR = { h: 24, s: 98, l: 43 }; // Reddish-orange (#D95F02)
 
   const percentage = (price - min) / (max - min);
-  const hue = percentage * (BLUE_HUE - YELLOW_HUE) + YELLOW_HUE;
 
-  return `hsl(${hue}, ${SATURATION}%, ${LIGHTNESS}%)`;
+  const hue =
+    percentage * (HIGH_PRICE_COLOR.h - LOW_PRICE_COLOR.h) + LOW_PRICE_COLOR.h;
+  const saturation =
+    percentage * (HIGH_PRICE_COLOR.s - LOW_PRICE_COLOR.s) + LOW_PRICE_COLOR.s;
+  const lightness =
+    percentage * (HIGH_PRICE_COLOR.l - LOW_PRICE_COLOR.l) + LOW_PRICE_COLOR.l;
+
+  return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
 };
 
 /**
@@ -35,6 +39,8 @@ export const createPriceIcon = (price, min, max) => {
     className: "custom-price-icon",
     html: `<div style="background-color: ${color}; width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 5px rgba(0,0,0,0.5);"></div>`,
     iconSize: [24, 24],
+    iconAnchor: [12, 12],
+    popupAnchor: [0, -12],
   });
 };
 
