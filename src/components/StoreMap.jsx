@@ -8,7 +8,6 @@ import { getFilteredStores } from '../helpers/getFilteredStores';
 import StoreModal from './StoreModal';
 import { Card, Statistic, Row, Col, Empty } from 'antd';
 
-// Fix Leaflet default marker icons
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',

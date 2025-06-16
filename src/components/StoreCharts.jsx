@@ -1,7 +1,7 @@
 import React, { useContext, useMemo } from 'react';
 import ReactECharts from 'echarts-for-react';
 import { DataContext } from '../context/DataContext';
-import { Row, Col, Empty } from 'antd';
+import {  Card, Empty } from 'antd';
 
 const StoreCharts = () => {
   const { stores } = useContext(DataContext);
@@ -71,20 +71,14 @@ const StoreCharts = () => {
   }
 
   return (
-    <Row gutter={16} style={{ marginTop: '24px' }}>
-      <Col xs={24} md={12}>
-        <ReactECharts
-          option={insegnaOption}
-          style={{ height: '400px', width: '100%' }}
-        />
-      </Col>
-      <Col xs={24} md={12}>
-        <ReactECharts
-          option={gruppoOption}
-          style={{ height: '400px', width: '100%' }}
-        />
-      </Col>
-    </Row>
+   <div>
+    <Card style={{ width: '100%', marginBottom: 32 }}>
+      <ReactECharts option={insegnaOption} style={{ height: 300, width: '100%' }} />
+    </Card>
+    <Card style={{ width: '100%' }}>
+      <ReactECharts option={gruppoOption} style={{ height: 300, width: '100%' }} />
+    </Card>
+  </div>
   );
 };
 
