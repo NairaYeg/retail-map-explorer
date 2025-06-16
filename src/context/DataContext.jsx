@@ -11,7 +11,6 @@ export const DataProvider = ({ children }) => {
     fetch('/stores_visible.json')
       .then((res) => res.json())
       .then((data) => {
-        console.log('Stores:', data);
         const formattedStores = data.map((store) => ({
           ...store,
           address: typeof store.address === 'string' ? JSON.parse(store.address) : store.address,
@@ -22,10 +21,7 @@ export const DataProvider = ({ children }) => {
 
     fetch('/zuegg_products.json')
       .then((res) => res.json())
-      .then((data) => {
-        console.log('Products:', data);
-        setProducts(data);
-      })
+      .then((data) => setProducts(data))
       .catch((error) => console.error('Error loading products:', error));
   }, []);
 

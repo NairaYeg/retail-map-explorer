@@ -4,7 +4,7 @@ import { DataContext } from '../context/DataContext';
 import { PLACEHOLDERS } from '../constants/messages';
 
 const ProductSearch = () => {
-  const { products, setSelectedProduct } = useContext(DataContext);
+  const { products, setSelectedProduct, selectedProduct } = useContext(DataContext);
   const [inputValue, setInputValue] = useState('');
 
   const productOptions = useMemo(() => {
@@ -34,7 +34,7 @@ const ProductSearch = () => {
 
   return (
     <AutoComplete
-      value={inputValue}
+      value={inputValue || selectedProduct}
       options={productOptions}
       style={{ width: '100%', marginBottom: '24px' }}
       placeholder={PLACEHOLDERS.PRODUCT_SEARCH}
