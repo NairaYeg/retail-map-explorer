@@ -1,17 +1,25 @@
 import L from "leaflet";
 
 /**
- * Calculates a color on a green-to-red gradient based on the price's position between min and max.
- * @param {number} price - The price to evaluate.
- * @param {number} minPrice - The minimum price in the range.
- * @param {number} maxPrice - The maximum price in the range.
- * @returns {string} An RGB color string representing the price's position on the gradient.
+ * Calculates a color in the yellow-to-blue gradient based on the given price range.
+ *
+ * @param {number} price - The current price.
+ * @param {number} min - The minimum price in the range.
+ * @param {number} max - The maximum price in the range.
+ * @returns {string} The calculated color in HSL format.
  */
 const getPriceGradientColor = (price, min, max) => {
-  if (min === max) return "#00ff00";
+  if (min === max) return "#1890ff"; // Blue fallback
+
+  const YELLOW_HUE = 60;
+  const BLUE_HUE = 240;
+  const SATURATION = 100;
+  const LIGHTNESS = 50;
+
   const percentage = (price - min) / (max - min);
-  const hue = (1 - percentage) * 120;
-  return `hsl(${hue}, 100%, 45%)`;
+  const hue = percentage * (BLUE_HUE - YELLOW_HUE) + YELLOW_HUE;
+
+  return `hsl(${hue}, ${SATURATION}%, ${LIGHTNESS}%)`;
 };
 
 /**
