@@ -1,4 +1,5 @@
 import { createPriceIcon } from "./createPriceIcon";
+import L from "leaflet";
 
 /**
  * Filters stores and prepares dynamic icons.
@@ -9,25 +10,29 @@ import { createPriceIcon } from "./createPriceIcon";
  */
 export const getFilteredStores = (selectedProduct, stores, products) => {
   if (!selectedProduct) {
-    return stores.map((s) => ({
-      ...s,
-      icon: createPriceIcon(1, 0, 1),
-    }));
+    return {
+      filteredStores: stores.map((s) => ({
+        ...s,
+        icon: new L.Icon.Default(),
+      })),
+      minPrice: null,
+      maxPrice: null,
+    };
   }
 
   const productPrices = products.filter((p) => p.name === selectedProduct);
   const storeIdsWithProduct = new Set(productPrices.map((p) => p.store_id));
 
-  // Compute min/max prices dynamically (because icons need them)
   const prices = productPrices
     .map((p) => parseInt(p.base_price, 10))
     .filter((p) => !isNaN(p));
-  const min = Math.min(...prices);
-  const max = Math.max(...prices);
+  const minPrice = prices.length > 0 ? Math.min(...prices) / 100 : null;
+  const maxPrice = prices.length > 0 ? Math.max(...prices) / 100 : null;
+  const minPriceForColor = prices.length > 0 ? Math.min(...prices) : 0;
+  const maxPriceForColor = prices.length > 0 ? Math.max(...prices) : 0;
 
-  // Filter stores and attach price/product info
   const filteredStores = stores
-    .filter((s) => storeIdsWithProduct.has(String(s.store_id))) // Filter only stores with the product
+    .filter((s) => storeIdsWithProduct.has(String(s.store_id)))
     .map((store) => {
       const productInfo = productPrices.find(
         (p) => p.store_id === String(store.store_id)
@@ -36,9 +41,17 @@ export const getFilteredStores = (selectedProduct, stores, products) => {
         ...store,
         base_price: productInfo?.base_price || 0,
         promo_price: productInfo?.promo_price || null,
-        icon: createPriceIcon(parseInt(productInfo.base_price, 10), min, max), // Create dynamic price icon
+        icon: createPriceIcon(
+          parseInt(productInfo?.base_price || 0, 10),
+          minPriceForColor,
+          maxPriceForColor
+        ),
       };
     });
 
-  return filteredStores;
+  return {
+    filteredStores,
+    minPrice,
+    maxPrice,
+  };
 };

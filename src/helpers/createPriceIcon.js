@@ -11,7 +11,6 @@ const getPriceGradientColor = (price, min, max) => {
   if (min === max) return "#00ff00";
   const percentage = (price - min) / (max - min);
   const hue = (1 - percentage) * 120;
-
   return `hsl(${hue}, 100%, 45%)`;
 };
 
