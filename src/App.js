@@ -1,11 +1,25 @@
-import "./App.css";
+import React, { useState } from "react";
+import { Card } from "antd";
+import StoreMap from "./components/StoreMap";
+import StoreCharts from "./components/StoreCharts";
+import { DataProvider } from "./context/DataContext";
+import AppLayout from "./components/AppLayout";
+import { NAVIGATION_ITEMS, DEFAULT_VIEW } from "./constants/navigation";
 
-function App() {
+const App = () => {
+  const [currentView, setCurrentView] = useState(DEFAULT_VIEW);
+  const currentNav = NAVIGATION_ITEMS.find((item) => item.key === currentView);
+
   return (
-    <div className="App">
-      <h1>Welcome to My React App</h1>
-    </div>
+    <DataProvider>
+      <AppLayout currentView={currentView} setCurrentView={setCurrentView}>
+        <Card title={currentNav?.cardTitle || ""}>
+          {currentView === "map" && <StoreMap />}
+          {currentView === "charts" && <StoreCharts />}
+        </Card>
+      </AppLayout>
+    </DataProvider>
   );
-}
+};
 
 export default App;
