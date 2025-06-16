@@ -1,22 +1,19 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useMemo } from 'react';
 import { MapContainer, TileLayer, Marker, Tooltip } from 'react-leaflet';
 import { Modal } from 'antd';
 import { DataContext } from '../context/DataContext';
-import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import {  getFilteredStores } from '../helpers'; 
 
 const StoreMap = () => {
-  const { stores } = useContext(DataContext);
+  const { stores, products, selectedProduct } = useContext(DataContext);
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedStore, setSelectedStore] = useState(null);
 
-  const createIcon = () => {
-    return L.divIcon({
-      className: 'custom-icon',
-      html: `<div style="background-color: blue; width: 20px; height: 20px; border-radius: 50%; border: 2px solid #fff;"></div>`,
-      iconSize: [20, 20],
-    });
-  };
+ const filteredStores = useMemo(
+    () => getFilteredStores(selectedProduct, stores, products),
+    [selectedProduct, stores, products]
+  );
 
   const handleMarkerClick = (store) => {
     setSelectedStore(store);
@@ -26,34 +23,42 @@ const StoreMap = () => {
   return (
     <div style={{ height: '500px', marginBottom: '24px' }}>
       <MapContainer
-        center={[45.5, 9.5]} // Center on Italy
-        zoom={8}
+        center={[41.9028, 12.4964]} // Center on Italy
+        zoom={6}
         style={{ height: '100%', width: '100%' }}
       >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
-        {stores.map((store) => (
+        {/* 2. Map over the dynamically filtered stores */}
+        {filteredStores.map((store) => (
           <Marker
             key={store.store_id}
             position={[parseFloat(store.latitude), parseFloat(store.longitude)]}
-            icon={createIcon()}
+            icon={store.icon} // Use the dynamic icon
             eventHandlers={{ click: () => handleMarkerClick(store) }}
           >
             <Tooltip>
+              {/* 3. Update the tooltip content */}
               <div>
-                <p><b>Street:</b> {store.address.street}</p>
-                <p><b>City:</b> {store.address.city}</p>
-                <p><b>Province:</b> {store.address.province}</p>
                 <p><b>Insegna:</b> {store.insegna}</p>
-                <p><b>Gruppo:</b> {store.gruppo}</p>
+                <p><b>City:</b> {store.address.city}</p>
+                {selectedProduct && (
+                  <>
+                    <hr />
+                    <p><b>Price:</b> €{(store.base_price / 100).toFixed(2)}</p>
+                    {store.promo_price && (
+                      <p style={{ color: 'red' }}><b>Promo:</b> €{(store.promo_price / 100).toFixed(2)}</p>
+                    )}
+                  </>
+                )}
               </div>
             </Tooltip>
           </Marker>
         ))}
       </MapContainer>
-
+      
       {selectedStore && (
         <Modal
           title="Store Details"

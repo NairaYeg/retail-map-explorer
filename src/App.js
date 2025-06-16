@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Card } from "antd";
+import { DataProvider } from "./context/DataContext";
 import StoreMap from "./components/StoreMap";
 import StoreCharts from "./components/StoreCharts";
-import { DataProvider } from "./context/DataContext";
+import ProductSearch from "./components/ProductSearch"; // 👈 Import the new component
 import AppLayout from "./components/AppLayout";
 import { NAVIGATION_ITEMS, DEFAULT_VIEW } from "./constants/navigation";
 
@@ -14,7 +15,12 @@ const App = () => {
     <DataProvider>
       <AppLayout currentView={currentView} setCurrentView={setCurrentView}>
         <Card title={currentNav?.cardTitle || ""}>
-          {currentView === "map" && <StoreMap />}
+          {currentView === "map" && (
+            <>
+              <ProductSearch />
+              <StoreMap />
+            </>
+          )}
           {currentView === "charts" && <StoreCharts />}
         </Card>
       </AppLayout>
