@@ -3,6 +3,7 @@ import {
   NAVIGATION_ITEMS,
   SIDER_WIDTH,
 } from "../constants/navigation";
+import { TITLES } from "../constants/messages";
 import "../App.css";
 
 const { Header, Sider, Content } = Layout;
@@ -10,7 +11,7 @@ const { Header, Sider, Content } = Layout;
 const AppLayout = ({ children, currentView, setCurrentView }) =>  (
     <Layout style={{ minHeight: "100vh" }}>
       <Header className="app-header">
-        <h1 className="app-title">Zuegg Store Explorer</h1>
+        <h1 className="app-title">{TITLES.DASHBOARD}</h1>
       </Header>
       <Layout>
         <Sider width={SIDER_WIDTH} className="app-sider" theme="light">

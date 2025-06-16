@@ -1,12 +1,12 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { useContext, useMemo, useState } from 'react';
+import { Card, Statistic, Row, Col, Empty , Typography } from 'antd';
 import L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
-import { DataContext } from '../context/DataContext';
 import ProductSearch from './ProductSearch';
-import { getFilteredStores } from '../helpers/getFilteredStores';
 import StoreModal from './StoreModal';
-import { Card, Statistic, Row, Col, Empty } from 'antd';
+import { DataContext } from '../context/DataContext';
+import { getFilteredStores } from '../helpers/getFilteredStores';
+import 'leaflet/dist/leaflet.css';
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -78,7 +78,9 @@ const StoreMap = () => {
                     <>
                       Base Price: €{(parseInt(store.base_price) / 100).toFixed(2)}<br />
                       {store.promo_price && (
-                        <>Promo Price: €{(parseInt(store.promo_price) / 100).toFixed(2)}</>
+                        <Typography.Text strong type="danger">
+                          Promo Price: €{(parseInt(store.promo_price) / 100).toFixed(2)}
+                        </Typography.Text>
                       )}
                     </>
                   )}

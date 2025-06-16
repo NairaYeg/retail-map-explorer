@@ -2,6 +2,7 @@ import { Modal, Descriptions } from "antd";
 
 const StoreModal = ({ store, products, onClose }) => (
   <Modal
+    width="60%"
     title={`Store: ${store.address.street}`}
     open={!!store}
     onCancel={onClose}

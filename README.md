@@ -1,10 +1,10 @@
-# Store & Product Price Explorer
+# 🗺️ Store & Product Price Explorer
 
 A React-based dashboard for visualizing store locations and product prices using Ant Design, Leaflet, and ECharts.
 
 ---
 
-## Overview
+## 📝 Overview
 
 Interactive dashboard displaying store locations, product prices, and store counts by **insegna** and **gruppo**. Features a responsive UI, map, charts, and product search with price-based marker coloring.
 
@@ -13,13 +13,13 @@ Interactive dashboard displaying store locations, product prices, and store coun
 ## Tech Stack
 
 - **Framework:** React  
-- **Map:** react-leaflet / Leaflet  
-- **Charts:** ECharts for React  
-- **UI:** Ant Design  
+- **Map:** react-leaflet / Leaflet 🗺️  
+- **Charts:** ECharts for React 📊  
+- **UI:** Ant Design 🎨  
 
 ---
 
-## Features
+## ✨ Features
 
 - **Dashboard Shell:** Ant Design Layout with navigation.
 - **Map:** Leaflet map with store markers, tooltips (address, insegna, gruppo, prices), and modal on click.
@@ -28,7 +28,7 @@ Interactive dashboard displaying store locations, product prices, and store coun
 
 ---
 
-## Setup Instructions
+## 🚀 Setup
 
 1.  **Clone the repository:**
     ```bash
@@ -50,10 +50,13 @@ Interactive dashboard displaying store locations, product prices, and store coun
     Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 
-## Improvements
+## 🚧  Improvements
 
 - **Accessibility:** Add ARIA tags for screen readers.
 - **Responsiveness:** Improve mobile map and layout scaling.
 - **Edge Cases:** Show clear errors for data or network issues.
+- **Testing:** Add unit test case coverage.
 
-Built with ❤️ by [Naira] - June 16, 2025
+Built with ❤️ by Naira - June 16, 2025
+
+Connect with me on [LinkedIn](https://www.linkedin.com/in/naira-yeghiazaryan-35398413b/) or [GitHub](https://github.com/NairaYeg)

@@ -1,6 +1,7 @@
 import React, { useContext, useMemo, useState } from 'react';
 import { AutoComplete } from 'antd';
 import { DataContext } from '../context/DataContext';
+import { PLACEHOLDERS } from '../constants/messages';
 
 const ProductSearch = () => {
   const { products, setSelectedProduct } = useContext(DataContext);
@@ -36,7 +37,7 @@ const ProductSearch = () => {
       value={inputValue}
       options={productOptions}
       style={{ width: '100%', marginBottom: '24px' }}
-      placeholder="Search for a product..."
+      placeholder={PLACEHOLDERS.PRODUCT_SEARCH}
       onChange={handleOnChange}
       onSelect={handleOnSelect}
       onClear={handleOnClear}

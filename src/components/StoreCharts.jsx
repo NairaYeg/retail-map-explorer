@@ -2,11 +2,11 @@ import React, { useContext, useMemo } from 'react';
 import ReactECharts from 'echarts-for-react';
 import { DataContext } from '../context/DataContext';
 import {  Card, Empty } from 'antd';
+import { TITLES, DESCRIPTIONS } from '../constants/messages';
 
 const StoreCharts = () => {
   const { stores } = useContext(DataContext);
 
-  // Count stores per insegna, filter out invalid values
   const insegnaCounts = useMemo(() => {
     const counts = stores.reduce((acc, store) => {
       if (store.insegna && typeof store.insegna === 'string') {
@@ -17,7 +17,6 @@ const StoreCharts = () => {
     return Object.entries(counts).map(([name, value]) => ({ name, value }));
   }, [stores]);
 
-  // Count stores per gruppo, filter out invalid values
   const gruppoCounts = useMemo(() => {
     const counts = stores.reduce((acc, store) => {
       if (store.gruppo && typeof store.gruppo === 'string') {
@@ -28,9 +27,8 @@ const StoreCharts = () => {
     return Object.entries(counts).map(([name, value]) => ({ name, value }));
   }, [stores]);
 
-  // ECharts configuration for insegna chart
   const insegnaOption = {
-    title: { text: 'Stores per Insegna', left: 'center' },
+    title: { text: TITLES.STORES_PER_INSEGNA, left: 'center' },
     xAxis: {
       type: 'category',
       data: insegnaCounts.map((c) => c.name),
@@ -47,9 +45,8 @@ const StoreCharts = () => {
     tooltip: { trigger: 'axis' },
   };
 
-  // ECharts configuration for gruppo chart
   const gruppoOption = {
-    title: { text: 'Stores per Gruppo', left: 'center' },
+    title: { text: TITLES.STORES_PER_GRUPPO, left: 'center' },
     xAxis: {
       type: 'category',
       data: gruppoCounts.map((c) => c.name),
@@ -67,7 +64,7 @@ const StoreCharts = () => {
   };
 
   if (insegnaCounts.length === 0 && gruppoCounts.length === 0) {
-    return <Empty description="No store data available for charts" />;
+    return <Empty description={DESCRIPTIONS.NO_STORE_DATA_CHARTS} />;
   }
 
   return (

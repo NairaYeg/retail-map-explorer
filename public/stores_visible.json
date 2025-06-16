@@ -22118,38 +22118,6 @@
     "insegna": "SUPER PAN"
   },
   {
-    "store_id": 8289,
-    "address": {
-      "city": "Iglesias (SU)",
-      "street": "Viale Villa di Chiesa",
-      "province": "SU",
-      "postalCode": "09016"
-    },
-    "latitude": 39.304420471191406,
-    "longitude": 8.556429862976074,
-    "services": "{pickup}",
-    "centrale": "ESD ITALIA",
-    "gruppo": "SELEX COMMERCIALE",
-    "orgcedi": "SUPEREMME SPA",
-    "insegna": "IPERPAN"
-  },
-  {
-    "store_id": 8289,
-    "address": {
-      "city": "Iglesias (SU)",
-      "street": "Viale Villa di Chiesa",
-      "province": "SU",
-      "postalCode": "09016"
-    },
-    "latitude": 39.304420471191406,
-    "longitude": 8.556429862976074,
-    "services": "{pickup}",
-    "centrale": "ESD ITALIA",
-    "gruppo": "SELEX COMMERCIALE",
-    "orgcedi": "SUPEREMME SPA",
-    "insegna": "HARDIS"
-  },
-  {
     "store_id": 8285,
     "address": {
       "city": "Cagliari (CA)",
