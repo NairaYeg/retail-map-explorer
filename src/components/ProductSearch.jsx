@@ -17,23 +17,23 @@ const ProductSearch = () => {
   const handleOnChange = (text) => {
     setInputValue(text);
     if (!text) {
-        setSelectedProduct(null);
+      setSelectedProduct(null);
     }
   };
 
   const handleOnSelect = (productName) => {
-    setInputValue(productName);     
-    setSelectedProduct(productName); 
+    setInputValue(productName);
+    setSelectedProduct(productName);
   };
-  
+
   const handleOnClear = () => {
-      setInputValue('');
-      setSelectedProduct(null);
+    setInputValue('');
+    setSelectedProduct(null);
   };
 
   return (
     <AutoComplete
-      value={inputValue} 
+      value={inputValue}
       options={productOptions}
       style={{ width: '100%', marginBottom: '24px' }}
       placeholder="Search for a product..."
