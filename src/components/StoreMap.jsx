@@ -52,7 +52,7 @@ const StoreMap = () => {
         </Card>
       )}
       <div style={{ height: '600px' }}>
-        <MapContainer center={center} zoom={8} style={{ height: '100%', width: '100%' }}>
+        <MapContainer center={center} zoom={5} style={{ height: '100%', width: '100%' }}>
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
