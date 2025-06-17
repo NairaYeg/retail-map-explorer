@@ -40,7 +40,7 @@ const StoreMap = () => {
     <div>
       <ProductSearch />
       {selectedProduct && minPrice !== null && maxPrice !== null && (
-        <Card style={{ marginBottom: '16px', width: '100%', maxWidth: '400px', padding: '8px' }}>
+        <Card style={{ marginBottom: '16px', width: '100%', maxWidth: '400px', padding: 0 }}>
           <Row gutter={16}>
             <Col span={12}>
               <Statistic title="Min Price" value={minPrice} prefix="€" precision={2} />
